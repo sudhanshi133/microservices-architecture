@@ -1,11 +1,14 @@
 package com.techie.microservices.product.service;
 
 import com.techie.microservices.product.dto.ProductRequest;
+import com.techie.microservices.product.dto.ProductResponse;
 import com.techie.microservices.product.model.Product;
 import com.techie.microservices.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -13,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class ProductService {
     private final ProductRepository productRepository;
 
-    public Product addProduct(ProductRequest productRequest){
+    public ProductResponse addProduct(ProductRequest productRequest){
         Product product = Product.builder()
                 .name(productRequest.name())
                 .description(productRequest.description())
@@ -21,6 +24,13 @@ public class ProductService {
                 .build();
         productRepository.save(product);
         log.info("product added successfully");
-        return product;
+        return new ProductResponse(product.getId(), product.getName(), product.getDescription(), product.getPrice());
+    }
+
+    public List<ProductResponse> getAllProducts() {
+        return productRepository.findAll()
+                .stream()
+                .map(product -> new ProductResponse(product.getId(), product.getName(), product.getDescription(), product.getPrice()))
+                        .toList();
     }
 }
