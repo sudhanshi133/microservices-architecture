@@ -15,8 +15,8 @@ import org.hamcrest.Matchers;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@SpringBootTest
-@WireMockTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+ @WireMockTest
 class OrderServiceApplicationTests {
 
 	@ServiceConnection
@@ -58,7 +58,7 @@ class OrderServiceApplicationTests {
 				.extract()
 				.body().asString();
 
-		assertThat(responseBodyString, Matchers.is("Order Placed Successfully"));
+		assertThat(responseBodyString, Matchers.is("order placed successfully"));
 	}
 
 	// todo there are 2 ways to test this out
