@@ -16,7 +16,7 @@ import org.hamcrest.Matchers;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
- @WireMockTest
+@WireMockTest
 class OrderServiceApplicationTests {
 
 	@ServiceConnection
