@@ -3,7 +3,7 @@ version: '3.8'
 services:
   mysql-db:
     image: mysql:8.3.0
-    container_name: mysql
+    container_name: mysql_order
     ports:
       - "3306:3306"
     environment:
