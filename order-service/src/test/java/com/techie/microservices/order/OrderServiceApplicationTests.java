@@ -9,6 +9,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Import;
 import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.mysql.MySQLContainer;
 import io.restassured.RestAssured;
 import org.hamcrest.Matchers;
@@ -16,7 +17,8 @@ import org.hamcrest.Matchers;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@WireMockTest
+@WireMockTest(httpPort = 8089)
+@Testcontainers
 class OrderServiceApplicationTests {
 
 	@ServiceConnection
@@ -54,7 +56,7 @@ class OrderServiceApplicationTests {
 				.post("/api/order")
 				.then()
 				.log().all()
-				.statusCode(200)
+				.statusCode(201)
 				.extract()
 				.body().asString();
 
