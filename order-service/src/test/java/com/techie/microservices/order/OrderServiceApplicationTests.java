@@ -54,7 +54,7 @@ class OrderServiceApplicationTests {
 				.post("/api/order")
 				.then()
 				.log().all()
-				.statusCode(201)
+				.statusCode(200)
 				.extract()
 				.body().asString();
 
